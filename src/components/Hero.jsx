@@ -18,7 +18,7 @@ const Hero = () => {
         />
         <div className="absolute inset-0 bg-cyanDark/40 mix-blend-multiply" />
         <div className="absolute inset-0 bg-linear-to-t from-cyanDark/80 via-transparent to-transparent" />
-        <div className="absolute bottom-0 right-0 w-full h-32 bg-gradient-to-t from-sand to-transparent z-10" />
+        <div className="absolute bottom-0 right-0 w-full h-32 bg-linear-to-t from-sand to-transparent z-10" />
       </div>
 
       <div className="relative z-20 text-center px-4 max-w-4xl mx-auto flex flex-col items-center">
