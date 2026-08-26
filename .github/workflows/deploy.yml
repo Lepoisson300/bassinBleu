@@ -1,56 +1,51 @@
 name: Deploy to GitHub Pages
 
 on:
-  # Se déclenche à chaque push sur la branche main
   push:
-    branches:
-      - main
-  # Permet de lancer le workflow manuellement depuis l'onglet Actions
-  workflow_dispatch:
+    branches: [main]
 
-# Définition des permissions nécessaires pour GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Permet d'annuler les déploiements en cours si un nouveau push arrive
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
-
-#les jobs de dieux
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Node
+      # 1. Installation de pnpm (obligatoire car non inclus par défaut sur Ubuntu)
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9 # Vous pouvez spécifier '8' si vous utilisez une ancienne version
+
+      # 2. Configuration de Node.js avec le cache défini sur 'pnpm'
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
+          cache: 'pnpm'
 
+      # 3. Installation des dépendances (étape manquante dans votre code initial)
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install
 
-      - name: Build
-        run: npm run build
+      # 4. Build du projet
+      - name: Build project
+        run: pnpm run build
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v3
         with:
-          # Le dossier généré par Vite
-          path: './dist'
+          path: dist
 
-      - name: Deploy to GitHub Pages
-        id: deployment
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
         uses: actions/deploy-pages@v4
