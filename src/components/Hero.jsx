@@ -1,4 +1,4 @@
-import React from 'react';
+import { lightBG } from "/lightBG.png"
 
 const Hero = () => {
   return (
@@ -12,7 +12,7 @@ const Hero = () => {
           className="absolute inset-0 w-full h-full object-cover block dark:hidden"
         />
         <img
-          src="/darkBG.png"
+          src={lightBG}
           alt="Terrasse de la guinguette sur le lac (Nuit)"
           className="absolute inset-0 w-full h-full object-cover hidden dark:block"
         />
