@@ -1,30 +1,31 @@
 import React, { useState } from 'react';
 import FadeInSection from './FadeInSection';
+const basePath = import.meta.env.BASE_URL;
 
 const menuItems = [
   // Tapas / Entrées
-  { name: 'Guacamole Maison', ingredients: 'Avocats frais, citron vert, coriandre, chips de maïs', category: 'tapas', image: '/guacamole.jpg' },
-  { name: 'Nachos Gratinés', ingredients: 'Cheddar fondu, jalapeños, crème aigre, pico de gallo', category: 'tapas', image: '/tapas.jpg' },
-  { name: 'Salade Estivale', ingredients: 'Jeunes pousses, feta, pastèque, menthe', category: 'tapas', image: '/salade_estivale.jpg' },
+  { name: 'Guacamole Maison', ingredients: 'Avocats frais, citron vert, coriandre, chips de maïs', category: 'tapas', image: basePath + 'guacamole.jpg' },
+  { name: 'Nachos Gratinés', ingredients: 'Cheddar fondu, jalapeños, crème aigre, pico de gallo', category: 'tapas', image: basePath + 'tapas.jpg' },
+  { name: 'Salade Estivale', ingredients: 'Jeunes pousses, feta, pastèque, menthe', category: 'tapas', image: basePath + 'salade_estivale.jpg' },
 
   // Plats (Bagels)
-  { name: 'Le Chèvre', ingredients: 'Caviar d\'aubergine, chèvre, miel', category: 'plats', image: '/bagel_chevre.jpg' },
+  { name: 'Le Chèvre', ingredients: 'Caviar d\'aubergine, chèvre, miel', category: 'plats', image: basePath + 'bagel_chevre.jpg' },
   { name: 'Le Burger', ingredients: 'Bœuf CH, cheddar, oignons caramélisés', category: 'plats', image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80' },
-  { name: 'Le Lève tard', ingredients: 'Bacon, raclette, œuf', category: 'plats', image: '/bagel_leve_tard.jpg' },
-  { name: 'Le Pulled Pork', ingredients: 'Porc effiloché CH', category: 'plats', image: '/bagel_pulled_pork.jpg' },
-  { name: 'Le Big JO', ingredients: 'Bœuf CH, raclette, bacon, œuf', category: 'plats', image: '/bagel_big_jo.jpg' },
+  { name: 'Le Lève tard', ingredients: 'Bacon, raclette, œuf', category: 'plats', image: basePath + 'bagel_leve_tard.jpg' },
+  { name: 'Le Pulled Pork', ingredients: 'Porc effiloché CH', category: 'plats', image: basePath + 'bagel_pulled_pork.jpg' },
+  { name: 'Le Big JO', ingredients: 'Bœuf CH, raclette, bacon, œuf', category: 'plats', image: basePath + 'bagel_big_jo.jpg' },
   { name: 'Le Vegan', ingredients: 'Tzatziki, burger végétal', category: 'plats', image: 'https://images.unsplash.com/photo-1525059696034-4967a8e1dca2?auto=format&fit=crop&w=800&q=80' },
   { name: 'Le Poulet', ingredients: 'Poulet mariné, crudités, sauce maison', category: 'plats', image: 'https://images.unsplash.com/photo-1615719413546-198b25453f85?auto=format&fit=crop&w=800&q=80' },
   { name: 'Le Red Hot', ingredients: 'Bœuf CH, cheddar, piments, sauce piquante', category: 'plats', image: 'https://images.unsplash.com/photo-1553979459-d2229ba7433b?auto=format&fit=crop&w=800&q=80' },
   { name: 'Le Nippon', ingredients: 'Saumon, wasabi, concombre, sésame', category: 'plats', image: 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=800&q=80' },
 
   // Desserts
-  { name: 'Cheesecake', ingredients: 'Coulis de fruits rouges maison', category: 'desserts', image: '/dessert.jpg' },
+  { name: 'Cheesecake', ingredients: 'Coulis de fruits rouges maison', category: 'desserts', image: basePath + 'dessert.jpg' },
   { name: 'Cookie Géant', ingredients: 'Pépites de chocolat fondant, noix de pécan', category: 'desserts', image: 'https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=800&q=80' },
   { name: 'Glace Artisanale', ingredients: '2 boules au choix (Vanille, Fraise, Citron)', category: 'desserts', image: 'https://images.unsplash.com/photo-1563805042-7684c8e9e1cb?auto=format&fit=crop&w=800&q=80' },
 
   // Boissons
-  { name: 'Citronnade Maison', ingredients: 'Citrons pressés, menthe fraîche, peu sucré', category: 'boissons', image: '/drink.jpg' },
+  { name: 'Citronnade Maison', ingredients: 'Citrons pressés, menthe fraîche, peu sucré', category: 'boissons', image: basePath + 'drink.jpg' },
   { name: 'Thé Glacé Pêche', ingredients: 'Infusion maison, morceaux de pêche', category: 'boissons', image: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=800&q=80' },
   { name: 'Bière Blonde Locale', ingredients: 'Pression 50cl - Brasserie du Lac', category: 'boissons', image: 'https://images.unsplash.com/photo-1575037614876-c3852d244d37?auto=format&fit=crop&w=800&q=80' },
 ];
@@ -46,10 +47,10 @@ const Menu = () => {
 
       {/* Decorative side images */}
       <div className="absolute top-20 -left-32 w-80 opacity-80 pointer-events-none mix-blend-multiply rotate-45">
-        <img src="/tropical_leaves.png" alt="Décoration" className="w-full rounded-2xl h-auto" />
+        <img src={basePath + "tropical_leaves.png"} alt="Décoration" className="w-full rounded-2xl h-auto" />
       </div>
       <div className="absolute bottom-10 -right-32 w-80 opacity-80 pointer-events-none mix-blend-multiply -rotate-45">
-        <img src="/tropical_leaves.png" alt="Décoration" className="w-full  h-auto" />
+        <img src={basePath + "tropical_leaves.png"} alt="Décoration" className="w-full  h-auto" />
       </div>
 
       <FadeInSection className="max-w-6xl mx-auto px-6 relative z-10">

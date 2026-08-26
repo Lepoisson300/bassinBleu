@@ -1,4 +1,4 @@
-import { lightBG } from "/lightBG.png"
+const basePath = import.meta.env.BASE_URL;
 
 const Hero = () => {
   return (
@@ -7,12 +7,7 @@ const Hero = () => {
       <div className="absolute inset-0 z-0">
         {/* L'image s'affichera selon le thème grâce aux classes 'dark:hidden' et 'hidden dark:block' */}
         <img
-          src="/lightBG.png"
-          alt="Terrasse de la guinguette sur le lac (Jour)"
-          className="absolute inset-0 w-full h-full object-cover block dark:hidden"
-        />
-        <img
-          src={lightBG}
+          src={basePath + 'darkBG.png'}
           alt="Terrasse de la guinguette sur le lac (Nuit)"
           className="absolute inset-0 w-full h-full object-cover hidden dark:block"
         />
