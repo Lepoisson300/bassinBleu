@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@theme {
+  --color-sand: #FDFBF7;
+  --color-sandDark: #F4F1E1;
+  --color-cyan: #00B4D8;
+  --color-cyanDark: #0096C7;
+  --color-tropicalGreen: #2A9D8F;
+  --color-tropicalGreen-300: #57c7b8;
+  --font-serif: "Playfair Display", serif;
+  --font-sans: "Outfit", sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-sand text-slate-800 font-sans antialiased selection:bg-cyan selection:text-white;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-serif;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
