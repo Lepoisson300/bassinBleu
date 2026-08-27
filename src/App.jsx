@@ -1,6 +1,7 @@
 import Hero from './components/Hero';
 import About from './components/About';
 import Menu from './components/Menu';
+import Events from './components/Events';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import FloatingControls from './components/FloatingControls';
@@ -11,6 +12,7 @@ function App() {
       <Hero />
       <About />
       <Menu />
+      <Events />
       <Contact />
       <Footer />
       <FloatingControls />
